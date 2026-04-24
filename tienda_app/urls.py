@@ -1,6 +1,7 @@
 from django.urls import path
 from .api.views import CompraAPIView
 from .views import CompraView, compra_rapida_fbv
+from .api.views import CompraAPIView, ProductosAPIView
 
 urlpatterns = [
     # Tutorial 01 - FBV (evidencia spaghetti)
@@ -11,4 +12,6 @@ urlpatterns = [
 
     # Tutorial 03 - API REST
     path('api/v1/comprar/', CompraAPIView.as_view(), name='api_comprar'),
+
+    path('api/v1/productos/', ProductosAPIView.as_view(), name='api_productos'),
 ]

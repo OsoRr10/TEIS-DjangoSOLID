@@ -47,3 +47,14 @@ class CompraAPIView(APIView):
         except Exception as e:
                 traceback.print_exc()  # imprime el error completo en la consola del servidor
                 return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from tienda_app.models import Libro
+from .serializers import LibroSerializer
+
+class ProductosAPIView(APIView):
+    def get(self, request):
+        libros = Libro.objects.all()
+        serializer = LibroSerializer(libros, many=True)
+        return Response(serializer.data)
