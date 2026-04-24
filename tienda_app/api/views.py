@@ -7,6 +7,7 @@ from tienda_app.services import CompraService
 
 from .serializers import OrdenInputSerializer
 
+import traceback
 
 class CompraAPIView(APIView):
     """
@@ -43,5 +44,6 @@ class CompraAPIView(APIView):
 
         except ValueError as e:
             return Response({'error': str(e)}, status=status.HTTP_409_CONFLICT)
-        except Exception:
-            return Response({'error': 'Error interno'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        except Exception as e:
+                traceback.print_exc()  # imprime el error completo en la consola del servidor
+                return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
